@@ -8,12 +8,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class holiday_parkingDAO {
+public class sunbyulDAO {
 
     @Autowired
     JdbcTemplate jt;
 
     public List<Map<String, Object>> select(int startRow) {
-        return jt.queryForList("select * from holiday_parking limit ?, 10",startRow);
+        return jt.queryForList("select * from sunbyul limit ?, 10",startRow);
     }
+    
 }
