@@ -1,10 +1,19 @@
 package com.example.basic;
 
+import java.util.List;
+import java.util.Map;
+
+import com.example.basic.Dao.holiday_parkingDAO;
+import com.example.basic.Dao.sunbyulDAO;
+
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 
 @SpringBootTest
 class BasicApplicationTests {
+	
 	
 	//JUnit - 단위테스트 ( <--> 통합테스트 )
 	//기능별.. API(메소드- ex. dao.select()), 회원가입(기능,업무)
@@ -14,8 +23,23 @@ class BasicApplicationTests {
 	//TDD (Test Driven Development) -- 실패하는 경우를 먼저 코드로 작성!
 	//etc.. DDD(Domain) / BDD(Behavior) 
 
+
+	@Autowired
+	holiday_parkingDAO hDao;
+	
 	@Test
 	void contextLoads() {
+		List<Map<String, Object>> result = hDao.select(1);
+		System.out.println(result);
 	}
-
+		
+	@Autowired
+	sunbyulDAO sDao;
+	
+	@Test
+	void contextLoads2() {
+		List<Map<String, Object>> result = sDao.select(1);
+		System.out.println(result);
+		
+	}
 }
