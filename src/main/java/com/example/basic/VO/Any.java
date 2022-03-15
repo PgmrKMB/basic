@@ -1,9 +1,14 @@
 package com.example.basic.VO;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import lombok.Data;
 
 @Data
+@Entity
 public class Any {
-    String name;
+    @Id
+	String name;
     int age;
 }

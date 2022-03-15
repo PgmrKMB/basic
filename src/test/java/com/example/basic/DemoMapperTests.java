@@ -1,6 +1,7 @@
 package com.example.basic;
 
 import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 
 import com.example.basic.mapper.DemoMapper;
@@ -16,9 +17,19 @@ class DemoMapperTests {
     @Autowired
     DemoMapper demoMapper;
 
-    // @Test
-    // public List<Map<String, Object>> mybatisDemo() {
-        
-    // }
+     @Test
+     public void insert(){
+    	 Map<String, Object> map = new HashMap<String, Object>();
+    	 map.put("seq", 3);
+    	 map.put("user", "CCC");
+    	 int z = demoMapper.insert(map);
+    	 System.out.println(z);
+     }
+     
+     @Test
+     public void select() {
+    	 List<Map<String, Object>> result = demoMapper.select();
+    	 System.out.println(result);
+     }
 
 }

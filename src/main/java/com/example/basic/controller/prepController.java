@@ -39,7 +39,7 @@ public class prepController {
     public Map<String, Object> data(
         @RequestParam(value = "name"  , required = false) String area,
         @RequestParam(value = "age"  , required = false) String score,
-        @ModelAttribute("data") com.example.basic.VO.dataex de) {
+        @ModelAttribute("data") dataex de) {
             Map<String,Object> map = new HashMap<>();
 
             if(area !=null){
@@ -50,5 +50,5 @@ public class prepController {
             }
             return map;
         }
-
+    
 }
