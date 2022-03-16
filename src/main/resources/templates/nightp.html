@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<table border="1">
+		<tr th:each="np : ${np}">
+			<td th:text="${np.id}"></td>
+			<td th:text="${np.name}"></td>
+			<td th:text="${np.tel}"></td>
+			<td th:text="${np.roadAddress}"></td>
+			<td th:text="${np.jibunAddress}"></td>
+			<td th:text="${np.mon}"></td>
+			<td th:text="${np.tue}"></td>
+			<td th:text="${np.wed}"></td>
+			<td th:text="${np.thu}"></td>
+			<td th:text="${np.fri}"></td>
+			<td th:text="${np.sat}"></td>
+			<td th:text="${np.sun}"></td>
+			<td th:text="${np.pubDay}"></td>
+		</tr>
+	</table>
+	<hr>
+	<th:block th:each="pageNumber : ${#numbers.sequence(1, 10)}">
+		<span th:text="${pageNumber}"></span>
+	</th:block>
+</body>
+</html>

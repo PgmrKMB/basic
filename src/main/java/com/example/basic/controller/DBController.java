@@ -16,9 +16,13 @@ import com.example.basic.repository.HoliRepository;
 import com.example.basic.repository.NightpRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -84,7 +88,7 @@ public class DBController {
     }
 
     @GetMapping("/jdbc/holi")
-    public List<Map<String, Object>> holi(@RequestParam(value = "page", defaultValue = "0") int page ){
+    public List<Map<String, Object>> holi(@RequestParam(value = "page", defaultValue = "1") int page ){
         // return jt.queryForList("select * from holiday_parking where address like '%금천구%'");
         int startRow = page * 10 - 10;
 
@@ -120,9 +124,22 @@ public class DBController {
 	@Autowired
 	DemoRepository demoRepository;
 
-	@GetMapping("/jpa/demo")
-	public List<Demo> jpaDemo() {
-		return demoRepository.findAll();
+	@GetMapping("/jpa/demo/{page}")
+	public List<Demo> jpaDemo(@PathVariable("page")int page) {
+		
+//		Sort sort = Sort.by(Sort.Direction.DESC, "user");
+//		
+//		Pageable p = PageRequest.of(page-1,3,sort);
+//		
+//		Page<Demo> result = demoRepository.findAll(p);
+//    	
+//    	List<Demo> demoList = result.getContent();
+//		
+//		return demoList;
+		
+		Pageable p = PageRequest.of(page-1,3);
+		
+		return demoRepository.findByOrderByUserDesc(p);
 	}
 
 	
@@ -136,11 +153,29 @@ public class DBController {
     }
     
     @Autowired
-    NightpRepository pn;
+    NightpRepository np;
     
-    @GetMapping("/jpa/pn")
-    public List<Night_Pharmacy> pn(){
-    	return pn.findByRoadAddressContainingOrJibunAddressContaining("대전","대전");
+    @GetMapping("/jpa/np1")
+    public List<Night_Pharmacy> pn(@RequestParam("page") int page){
+    	Pageable p = PageRequest.of(page-1,5);
+    	return np.findByRoadAddressContainingOrJibunAddressContainingOrderByIdDesc("대전","대전",p);
+    }
+
+    @GetMapping("/jpa/np2/{page}")
+    public List<Night_Pharmacy> pn2(@PathVariable("page")int page){
+    	
+    	Sort sort = Sort.by("name");
+    	
+    	sort = Sort.by(Sort.Direction.DESC, "id");
+    	
+    	
+    	Pageable p = PageRequest.of(page-1,10,sort);
+    	
+    	Page<Night_Pharmacy> result = np.findAll(p);
+    	
+    	List<Night_Pharmacy> npList = result.getContent();
+    	
+    	return npList;
     }
     
 }

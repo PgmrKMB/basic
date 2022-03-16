@@ -13,5 +13,5 @@ public class Night_Pharmacy {
 	@Id
 	private Long id;
 	private String name, tel, roadAddress, jibunAddress,
-	mon, tue, thu, fri, sat, sun, pubDay;
+	mon, tue, wed, thu, fri, sat, sun, pubDay;
 }
