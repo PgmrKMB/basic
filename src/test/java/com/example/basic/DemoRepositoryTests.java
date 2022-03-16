@@ -54,7 +54,7 @@ class DemoRepositoryTests {
     public void holiins() {
     	List<Holiday_Parking> list = hp.findByInstitution("성산고등학교");
     	List<Holiday_Parking> list2 = hp.findByInstitutionContaining("중학");
-    	System.out.println(list2);
+    	System.out.println(list);
     }
     
 }
