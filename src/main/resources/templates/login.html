@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<form action="/login" method="post">
+ID : <input type="text" name="userId"><br>
+PW : <input type="password" name="userPw"><br>
+<input type="submit" value="로그인">
+</form>
+
+<script src ="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+ const btn = document.querySelector("[type=submit]");
+ btn.addEventListener("click", (event) =>{
+	 event.preventDefault();
+	 
+	 const formData = new FormData();
+		
+	  const userId = document.querySelector("[name=userId]").value;
+	  formData.append("userId",userId);
+	
+	  const userPw = document.querySelector("[name=userPw]").value;
+	  formData.append("userPw",userPw);
+	  
+	  const res = axios({
+		  url:"/login",
+		  method: "post",  //Form Data라고 부름. 
+		  data: formData
+	  });
+	  
+	  //consol.log(res);//결과 제대로 나오지 않음 비동기라서.. 마치 스레드?
+	  res.then((data) =>{
+		  console.log(data);
+		  alert(data);
+	  });
+   });
+ </script>
+</body>
+</html>
