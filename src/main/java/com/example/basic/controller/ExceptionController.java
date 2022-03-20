@@ -20,4 +20,6 @@ public class ExceptionController {
 			throw new CustomException("runtime exception!");
 		return "exception2";
 	}
+
+
 }
