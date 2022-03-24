@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="text">
+	<button>실행</button>
+	<div></div>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+	<script>
+    //                                속성 선택자
+  const btn = document.querySelector("button");
+  btn.addEventListener("click", ( event ) => {
+	  event.preventDefault();  //기본 기능 중지
+	  
+	  const address = document.querySelector("input").value;	  
+	  const res = axios({
+		  url:"/getKakao",
+		  method: "get",  //Form Data라고 부름. 
+		  params: {
+			  "address" : address
+		  }
+	  });
+	  
+	  res.then((result) => { 
+		  console.log(result.data)
+		  let code = "<select>";
+		  
+		  const documents = result.data.documents;
+		  for(let document of documents){
+			  const address_name = document.address_name;
+			  const x = document.x;
+			  const y = document.y;
+			
+			  code +=`<option>${address_name} / ${y} / ${x} </option>`; 
+		  }    
+		  code += "</select>"
+		  document.querySelector("div").innerHTML = code;
+	  });
+    });
+</script>
+</body>
+</html>
